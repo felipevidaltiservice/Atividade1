@@ -1,3 +1,4 @@
+/* Reset básico e configuração do box-sizing */
 * {
   margin: 0;
   padding: 0;
@@ -9,54 +10,106 @@ body {
   line-height: 1.6;
   background-color: #f4f4f4;
   color: #333;
-  padding: 20px;
+  /* Adiciona padding no topo para não ficar atrás do header fixo */
+  padding-top: 80px; 
 }
 
 /* Cabeçalho */
 header {
-  background-color: #004080;
-  color: rgb(255, 255, 255);
-  padding: 10px;
-  text-align: center;
+  background-color: #000000; 
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Garante que o header ocupe toda a largura */
+  z-index: 1000;
 }
 
-/* Seções */
+/* Logo */
+header .logo img {
+  height: 50px;       
+  width: auto;      
+  display: block;
+}
+
+/* Estilo geral das seções */
 section {
   background-color: white;
-  margin-top: 20px;
+  margin: 20px; /* Adiciona margem em todos os lados */
   padding: 20px;
   border-radius: 8px;
 }
 
-.imagens, .videos .video-container {
+/* Galeria de Imagens */
+
+.carousel {
+  max-width: 800px; 
+  margin: 0 auto; 
+  border-radius: 8px; 
+  overflow: hidden; 
+}
+
+.carousel-item img {
+    height: 450px; 
+    object-fit: cover; 
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+    color: #0f0f0f; /* Uma cor roxa, por exemplo */
+    font-size: 2.5rem; /* Um pouco maior para destacar */
+}
+
+/*.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1); /* Inverte a cor para branco se forem pretos */
+}/*
+
+/* Vídeos */
+.video-container {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.imagens figure {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.imagens figure div {
-  flex: 0 1 auto; /
 }
 
 .video-container iframe {
-  flex: 1 1 45%;   
-  max-width: 100%; 
+  flex: 1 1 400px; /* As iframes tentarão ter 400px, mas podem encolher/crescer */
+  max-width: 560px; /* Limita a largura máxima de cada vídeo */
   height: 315px;  
   border-radius: 8px;
+  border: none;
 }
 
 /* Mapa */
+.mapa {
+    text-align: center; /* Centraliza o iframe do mapa */
+}
+
 .mapa iframe {
-  width: 400%;
+  max-width: 100%; /* Garante que o mapa não ultrapasse a largura da seção */
+  width: 800px; /* Define uma largura padrão */
   height: 400px;
   border-radius: 10px;
   border: none;
+}
+
+/* Media Query para telas menores (Responsividade) */
+@media screen and (max-width: 768px) {
+  body {
+    padding-top: 70px; /* Ajusta o padding para a altura do header */
+  }
+
+  header {
+    padding: 0.5rem 1rem; /* Diminui o padding do header em telas menores */
+  }
+  
+  /* Faz os vídeos ocuparem 100% da largura e se empilharem */
+  .video-container iframe {
+    flex-basis: 100%;
+  }
 }
